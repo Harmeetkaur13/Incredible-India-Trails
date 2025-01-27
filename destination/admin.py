@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Destination
+from .models import Category, Destination,Review
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -41,3 +41,29 @@ class DestinationAdmin(admin.ModelAdmin):
         if not request.user.is_superuser:
             return qs.filter(is_approved=True)
         return qs
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    """
+    Admin interface definition for the Review model.
+    This class customizes the Django admin interface for the Review model, providing
+    various configurations for displaying, filtering, searching, and ordering reviews.
+    Attributes:
+        list_display (tuple): Specifies the fields to be displayed in the list view.
+        list_filter (tuple): Specifies the fields to be used for filtering the list view.
+        search_fields (tuple): Specifies the fields to be used for searching in the list view.
+        ordering (tuple): Specifies the default ordering of the list view.
+        list_editable (tuple): Specifies the fields that can be edited directly in the list view.
+    Methods:
+    rating_display(obj): Returns a string representation of the rating using stars.
+    """
+    list_display = ("destination", "user", "rating", "comment", "is_approved", "created_at")
+    list_filter = ("is_approved", "rating", "destination")
+    search_fields = ("destination__name", "user__username", "comment")
+    ordering = ("-created_at",)
+    list_editable = ("is_approved",)
+
+    def rating_display(self, obj):
+        return "★" * obj.rating + "☆" * (5 - obj.rating)
+    rating_display.short_description = 'Rating'
+    list_display = ("destination", "user", "rating_display", "comment", "is_approved", "created_at")

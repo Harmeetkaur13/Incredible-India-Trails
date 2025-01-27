@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
-# Create your models here.
+# Category model for categorizing destinations
 class Category(models.Model):
     """
     Stores a single category entry related to :model:`auth.User`.
@@ -14,6 +14,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+# Destination model to store information about places
 class Destination(models.Model):
     """
     Stores a single destination entry related to :model:`auth.User`.
@@ -36,4 +37,28 @@ class Destination(models.Model):
 
     def __str__(self):
         return f"{self.name} | written by {self.added_by}"
+    class Meta:
+        ordering = ["-created_at"]
 
+# Review model to store reviews for destinations
+RATING_CHOICES = [(i, f"{i} Star") for i in range(1, 6)]  # Rating choices from 1 to 5 stars
+
+class Review(models.Model):
+    """
+    Stores a review for a destination by a user.
+    Related to :model:`destination.Destination`.
+    """
+    destination = models.ForeignKey(Destination, on_delete=models.CASCADE, related_name="reviews_destination")
+    destination = models.ForeignKey(Destination, on_delete=models.CASCADE, related_name="reviews")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
+    rating = models.IntegerField(choices=RATING_CHOICES)
+    comment = models.TextField()
+    is_approved = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Review for {self.destination.name}: '{self.comment}' by {self.user.username}"
+
+    class Meta:
+        ordering = ['-created_at']  # Show most recent reviews first
