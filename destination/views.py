@@ -1,6 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.views import generic
+from .models import Destination
+
 # Create your views here.
-def destination(request):
-	return HttpResponse("Hello!")
+class AllDestinations(generic.ListView):
+    queryset = Destination.objects.all()
+    template_name = "destination/destination.html"
+    paginate_by = 6
 
