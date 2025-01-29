@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django_summernote.admin import SummernoteModelAdmin
 from .models import Category, Destination,Review,Image
 
 class ImageInline(admin.TabularInline):
@@ -21,7 +22,7 @@ class CategoryAdmin(admin.ModelAdmin):
     ordering = ("name",)
 
 @admin.register(Destination)
-class DestinationAdmin(admin.ModelAdmin):
+class DestinationAdmin(SummernoteModelAdmin):
     """
     Admin view for Destination model.
     Displays id, name, category, added_by, is_approved, status, and created_at in the list view.
