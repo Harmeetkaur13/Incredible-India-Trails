@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'cloudinary_storage',
+    'cloudinary',
     "destination",
 ]
 
@@ -89,7 +91,7 @@ DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.codeinstitute-ide.net/",
+    "https://localhost",
     "https://*.herokuapp.com"
 ]
 # Password validation

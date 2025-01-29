@@ -1,8 +1,28 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 STATUS = ((0, "Draft"), (1, "Published"))
+# age model for storing multiple images for a destination
+class Image(models.Model):
+    """
+    Model representing an image associated with a specific destination.
+        destination (ForeignKey): Foreign key to the Destination model, representing the destination this image is associated with.
+        image (CloudinaryField): Field to store the image using Cloudinary.
+       
+        __str__(): Returns a string representation of the image, including its ID and the name of the associated destination.
+    Note:
+        This model allows multiple images to be associated with a single destination.
+    
+    """
+    destination = models.ForeignKey('Destination', on_delete=models.CASCADE, related_name='images_destination')
+    image = CloudinaryField('image')
+    caption = models.CharField(max_length=255, blank=True, null=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"Image {self.id} for {self.destination.name}"
+    
 # Category model for categorizing destinations
 class Category(models.Model):
     """
@@ -49,7 +69,6 @@ class Review(models.Model):
     Related to :model:`destination.Destination`.
     """
     destination = models.ForeignKey(Destination, on_delete=models.CASCADE, related_name="reviews_destination")
-    destination = models.ForeignKey(Destination, on_delete=models.CASCADE, related_name="reviews")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
     rating = models.IntegerField(choices=RATING_CHOICES)
     comment = models.TextField()

@@ -1,5 +1,13 @@
 from django.contrib import admin
-from .models import Category, Destination,Review
+from .models import Category, Destination,Review,Image
+
+class ImageInline(admin.TabularInline):
+    """
+    Inline admin descriptor for Image model
+    which acts a bit like a singleton.
+    """
+    model = Image
+    extra = 1
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -32,7 +40,8 @@ class DestinationAdmin(admin.ModelAdmin):
     list_editable = ("is_approved", "status")
     date_hierarchy = "created_at"
     raw_id_fields = ("added_by",)
-
+    inlines = [ImageInline]
+    
     def get_queryset(self, request):
         """
         Customize the queryset to show only approved destinations for non-superusers. Usefull when users have staff status.
