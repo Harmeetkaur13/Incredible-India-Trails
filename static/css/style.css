@@ -1,5 +1,5 @@
 body {
-    background-color: #F9FAFC;
+    background-color: #193d6d;
 }
 
 .brand {
@@ -39,11 +39,11 @@ body {
 }
 
 .image-flash {
-    position: absolute;
-    bottom: 5%;
-    min-width: 30%;
-    left: -2px;
-    background-color: #188181;
+    /* margin-left: 20%;
+    margin-right: 0%; */
+    top: 1px;
+    min-width: 140px;
+    max-width: 160px;
 }
 
 .scale {
@@ -158,4 +158,8 @@ body {
 
 .approval {
     color: rgb(222, 146, 168);
+}
+
+footer {
+    background-color: #193d6d;
 }

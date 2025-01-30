@@ -28,8 +28,9 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}"><span class="brand">Incredible<span
-                        class="thin">|India</span></span></a>
+            <a href="{% url 'home' %}">
+                <img class="image-flash" src="{% static 'images/logo.webp' %}" alt="logo">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -37,17 +38,19 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page"
-                            href="#">Home</a>
+                        <a class="nav-link {% if request.path == home_url %}active{% endif %}" href="{% url 'home' %}">
+                            Home
+                        </a>
                     </li>
-
                 </ul>
                 <span class="navbar-text text-muted">
-                    Lets see the beauty of India
+                    Let's explore the beauty of India
                 </span>
             </div>
         </div>
     </nav>
+    
+    
 
     <main class="flex-shrink-0 main-bg">
 
@@ -56,9 +59,8 @@
         {% endblock content %}
 
     </main>
-
     <!-- Footer -->
-    <footer class="footer mt-auto py-3 dark-bg">
+    <footer class="footer mt-auto py-3 ">
         <p class="m-0 text-center text-white">Made by Harmeet kaur</p>
         <p class="m-0 text-center text-white">Follow me: <i class="fab fa-facebook-square ms-3"></i>
             <i class="fab fa-twitter-square ms-3"></i>
