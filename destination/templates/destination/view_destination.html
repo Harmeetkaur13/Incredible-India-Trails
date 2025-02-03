@@ -7,12 +7,12 @@
     <div class="container">
         <div class="row g-0">
             <div class="col-md-3 masthead-text">
-                <h1 class="post-title">{{ destination.name }}</h1>
-                <p class="post-subtitle">{{ destination.added_by }} | {{ destination.created_at }}</p>
+                <h1 class="destination-title">{{ destination.name }}</h1>
+                <p class="destination-subtitle">{{ destination.added_by }} | {{ destination.created_at }}</p>
             </div>
             <div class="col-md-9 masthead-image collage-container">
                 {% for image in destination.images_destination.all %}
-                    <div class="collage-item">
+                    <div class="collage-item {% if forloop.first %}d-block{% else %}d-none d-md-block{% endif %}">
                         <img src="{{ image.image.url }}" alt="Image for {{ destination.name }}" class="collage-image" onclick="showCarousel('{{ forloop.counter0 }}')">
                     </div>
                 {% endfor %}
@@ -23,7 +23,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="carouselModalLabel">Image Carousel for {{ destination.name }}</h5>
+                            <!--<h5 class="modal-title" id="carouselModalLabel">Image Carousel for {{ destination.name }}</h5> -->
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -48,19 +48,19 @@
                     </div>
                 </div>
             </div>
-
-            <script>
-                function showCarousel(index) {
-                    var carousel = new bootstrap.Modal(document.getElementById('carouselModal'));
-                    carousel.show();
-                    var carouselElement = document.getElementById('destinationCarousel');
-                    var carouselInstance = bootstrap.Carousel.getInstance(carouselElement);
-                    carouselInstance.to(index);
-                }
-            </script>
         </div>
     </div>
 </div>
+
+<script>
+    function showCarousel(index) {
+        var carousel = new bootstrap.Modal(document.getElementById('carouselModal'));
+        carousel.show();
+        var carouselElement = document.getElementById('destinationCarousel');
+        var carouselInstance = bootstrap.Carousel.getInstance(carouselElement);
+        carouselInstance.to(index);
+    }
+</script>
 
 <div class="container">
     <div class="row">
@@ -87,7 +87,7 @@
     </div>
     <!-- Displaying Reviews -->
     <div class="row">
-        <div class="col-md-8 card mb-4 mt-3">
+        <div class="col-md-6 card mb-1 mt-3">
             <h3>Reviews:</h3>
             <div class="card-body">
                 <!-- We want a for loop inside the empty control tags to iterate through each review in reviews -->
@@ -124,12 +124,12 @@
             </div>
         </div>
         <!-- Creating New Reviews -->
-        <div class="col-md-4 card mb-4 mt-3">
+        <div class="col-md-6 card mb-1 mt-3">
             <div class="card-body">
                 {% if user.is_authenticated %}
                 <h3>Leave a review:</h3>
                 <p>Posting as: {{ user.username }}</p>
-                <form id="reviewForm" method="post" style="margin-top: 1.3em;" onsubmit="return validateForm()">
+                <form id="reviewForm" method="post" style="margin-top: 1.3em;">
                     {% csrf_token %}
                     <!-- Star rating system -->
                     <div class="star-rating"> 
@@ -179,34 +179,4 @@
 
 {% block extras %}
 <script src="{% static 'js/popup.js' %}"></script>
-<script>
-    function validateForm() {
-        const ratingInputs = document.querySelectorAll('input[name="rating"]');
-        let ratingSelected = false;
-        ratingInputs.forEach(input => {
-            if (input.checked) {
-                ratingSelected = true;
-            }
-        });
-
-        if (!ratingSelected) {
-            ratingInputs[0].setCustomValidity("Please select a rating before submitting your review.");
-            ratingInputs[0].reportValidity();
-            return false;
-        } else {
-            ratingInputs[0].setCustomValidity("");
-        }
-
-        return true;
-    }
-
-    function showMessage(message) {
-        document.getElementById('popup-text').innerText = message;
-        document.getElementById('popup-message').style.display = 'block';
-    }
-
-    document.getElementById('popup-close').addEventListener('click', function() {
-        document.getElementById('popup-message').style.display = 'none';
-    });
-</script>
 {% endblock extras %}

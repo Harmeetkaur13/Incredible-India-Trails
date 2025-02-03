@@ -57,22 +57,26 @@ body {
     text-transform: uppercase;
 }
 
+/* Masthead Styles */
 .masthead {
-    margin-top: 10px;
-    overflow: hidden;
-    position: relative;
-    display: inline-block;
-    height: 33vh;
-    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
 .masthead-text {
     background-color: #445261;
     color: white;
     position: relative;
+    text-align: left;
 }
 
 .masthead-image {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     position: relative;
     overflow: hidden;
 }
@@ -101,12 +105,12 @@ body {
     color: #E84610;
 }
 
-.post-title {
+.destination-title {
     margin-top: 10%;
     margin-left: 5%;
 }
 
-.post-subtitle {
+.destination-subtitle {
     margin-left: 5%;
     color: lightgray;
 }
@@ -178,7 +182,7 @@ footer {
 .star-rating label {
     color: #ddd;
     cursor: pointer;
-    font-size: 2em;
+    font-size: 1.5em;
     padding: 0;
 }
 
@@ -204,11 +208,11 @@ footer {
     position: relative;
 }
 
+/* Collage Styles */
 .collage-item {
+    flex: 1 1 calc(33.333% - 10px);
     position: relative;
-    width: calc(100% / 3 - 10px);
-    /* all images in a row */
-    height: 100%;
+    cursor: pointer;
     overflow: hidden;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -220,10 +224,53 @@ footer {
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
+.collage-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
 .collage-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     /* Ensures the image fits without distortion */
     border-radius: 12px;
+}
+
+/* Carousel Image */
+.carousel-item img {
+    object-fit: cover;
+    max-height: 50vh;
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .masthead {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .masthead-text {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .collage-item {
+        flex: 1 1 calc(100% - 10px);
+    }
+
+    .reviews,
+    .new-review {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .btn-signup {
+        width: 100%;
+    }
 }
