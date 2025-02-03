@@ -17,7 +17,7 @@ class CategoryAdmin(admin.ModelAdmin):
     Displays id, name, and description in the list view.
     Allows searching by name and orders by name by default.
     """
-    list_display = ("id", "name", "description")
+    list_display = ("name", "description")
     search_fields = ("name",)
     ordering = ("name",)
 
@@ -34,7 +34,7 @@ class DestinationAdmin(SummernoteModelAdmin):
     Allows selecting users via a search pop-up for added_by field.
     Customizes the queryset to show only approved destinations for non-superusers.
     """
-    list_display = ("id", "name", "category", "added_by", "is_approved", "status", "created_at")
+    list_display = ("name", "category", "added_by", "is_approved", "status", "created_at")
     list_filter = ("is_approved", "status", "category")
     search_fields = ("name", "description", "location", "added_by__username")
     ordering = ("-created_at",)
@@ -67,13 +67,14 @@ class ReviewAdmin(admin.ModelAdmin):
     Methods:
     rating_display(obj): Returns a string representation of the rating using stars.
     """
-    list_display = ("destination", "user", "rating", "comment", "is_approved", "created_at")
+    # list_display = ("destination", "rating", "comment", "is_approved", "created_at")
     list_filter = ("is_approved", "rating", "destination")
     search_fields = ("destination__name", "user__username", "comment")
     ordering = ("-created_at",)
     list_editable = ("is_approved",)
 
     def rating_display(self, obj):
-        return "★" * obj.rating + "☆" * (5 - obj.rating)
+        rating = obj.rating if obj.rating is not None else 0
+        return "★" * rating + "☆" * (5 - rating)
     rating_display.short_description = 'Rating'
-    list_display = ("destination", "user", "rating_display", "comment", "is_approved", "created_at")
+    list_display = ("destination", "rating_display", "comment", "is_approved", "created_at")
