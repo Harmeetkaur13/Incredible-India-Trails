@@ -163,3 +163,30 @@ body {
 footer {
     background-color: #193d6d;
 }
+
+.star-rating {
+    direction: rtl;
+    display: inline-block;
+    font-size: 2em;
+    unicode-bidi: bidi-override;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    color: #ddd;
+    cursor: pointer;
+    font-size: 2em;
+    padding: 0;
+}
+
+.star-rating input:checked~label {
+    color: #f5b301;
+}
+
+.star-rating label:hover,
+.star-rating label:hover~label {
+    color: #f5b301;
+}

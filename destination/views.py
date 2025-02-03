@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from django.db.models import Q
-from .models import Category,Destination
+from .models import Category,Destination, Review
+from .forms import ReviewForm
+from django.contrib import messages
 
 # Create your views here.
 class AllDestinations(generic.ListView):
@@ -46,9 +48,30 @@ def destination_detail(request, name):
 
     queryset = Destination.objects.filter(status=1)
     destination = get_object_or_404(queryset, name=name)
+    reviews = destination.reviews_destination.all().order_by("-created_at")
+    review_count = destination.reviews_destination.filter(is_approved=True).count()
+    Review_form = ReviewForm()
+    if request.method == "POST":
+        Review_form = ReviewForm(data=request.POST)
+        if Review_form.is_valid():
+            Review = Review_form.save(commit=False)
+            Review.user = request.user
+            Review.destination = destination
+            Review.rating = request.POST.get('rating')
+            Review.save()
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Your review is submitted and awaiting for the approval.'
+            )
+            return redirect("view_destination", name=destination.name)
+   
 
     return render(
         request,
         "destination/view_destination.html",
-        {"destination": destination},
+        {"destination": destination,
+        "reviews": reviews,
+        "review_count": review_count,
+        "Review_form": Review_form,
+        },
     )

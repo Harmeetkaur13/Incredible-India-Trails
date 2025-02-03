@@ -61,7 +61,7 @@ class Destination(models.Model):
         ordering = ["-created_at"]
 
 # Review model to store reviews for destinations
-RATING_CHOICES = [(i, f"{i} Star") for i in range(1, 6)]  # Rating choices from 1 to 5 stars
+RATING_CHOICES = [(i, f"{i} Star") for i in range(0, 6)]  # Rating choices from 1 to 5 stars
 
 class Review(models.Model):
     """
@@ -70,7 +70,7 @@ class Review(models.Model):
     """
     destination = models.ForeignKey(Destination, on_delete=models.CASCADE, related_name="reviews_destination")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
-    rating = models.IntegerField(choices=RATING_CHOICES)
+    rating = models.IntegerField(choices=RATING_CHOICES, default=0, null=True)
     comment = models.TextField()
     is_approved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
