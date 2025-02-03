@@ -190,3 +190,8 @@ footer {
 .star-rating label:hover~label {
     color: #f5b301;
 }
+
+.destinationimage {
+    height: 300px;
+    object-fit: cover;
+}

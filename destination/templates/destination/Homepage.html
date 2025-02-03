@@ -29,12 +29,22 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <div class="image-container">
-                                <div class="images">
+                            <div id="carousel-{{ destination.id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+                                <div class="carousel-inner">
                                     {% for image in destination.images_destination.all %}
-                                    <img class="card-img-top" src="{{ image.image.url }}" alt="{{ destination.name }}">
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <img class="d-block w-100 destinationimage" src="{{ image.image.url }}" alt="{{ destination.name }}">
+                                    </div>
                                     {% endfor %}
                                 </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ destination.id }}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ destination.id }}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
                             </div>
                             <a href="{% url 'view_destination' destination.name %}" class="post-link">
                                 <h2 class="card-title">{{ destination.name }}</h2>
