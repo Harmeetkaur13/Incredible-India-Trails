@@ -6,22 +6,65 @@
 <div class="masthead">
     <div class="container">
         <div class="row g-0">
-            <div class="col-md-6 masthead-text">
-                <!-- Post title goes in these h1 tags -->
+            <div class="col-md-3 masthead-text">
                 <h1 class="post-title">{{ destination.name }}</h1>
-                <!-- Post author goes before the | the post's created date goes after -->
-                <p class="post-subtitle">{{ destination.added_by }} | {{ added_by.created_at }}</p>
+                <p class="post-subtitle">{{ destination.added_by }} | {{ destination.created_at }}</p>
             </div>
-            <div class="d-none d-md-block col-md-6 masthead-image">
-                <img src="{% static 'images/pink city.webp' %}" class="scale" alt="placeholder">
+            <div class="col-md-9 masthead-image collage-container">
+                {% for image in destination.images_destination.all %}
+                    <div class="collage-item">
+                        <img src="{{ image.image.url }}" alt="Image for {{ destination.name }}" class="collage-image" onclick="showCarousel('{{ forloop.counter0 }}')">
+                    </div>
+                {% endfor %}
             </div>
+
+            <!-- Modal for displaying the carousel -->
+            <div class="modal fade" id="carouselModal" tabindex="-1" aria-labelledby="carouselModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="carouselModalLabel">Image Carousel for {{ destination.name }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="destinationCarousel" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    {% for image in destination.images_destination.all %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <img src="{{ image.image.url }}" class="d-block w-100" style="object-fit: cover; height: 50%;" alt="Image for {{ destination.name }}">
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#destinationCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#destinationCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                function showCarousel(index) {
+                    var carousel = new bootstrap.Modal(document.getElementById('carouselModal'));
+                    carousel.show();
+                    var carouselElement = document.getElementById('destinationCarousel');
+                    var carouselInstance = bootstrap.Carousel.getInstance(carouselElement);
+                    carouselInstance.to(index);
+                }
+            </script>
         </div>
     </div>
 </div>
 
 <div class="container">
     <div class="row">
-        <div class="col card mb-4  mt-3 left  top">
+        <div class="col card mb-4  mt-1 left  top">
             <div class="card-body">
                 <!-- The deestination detil goes inside the card-text. -->
                 <!-- Use the | safe filter inside the template tags -->
