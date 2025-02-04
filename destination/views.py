@@ -75,3 +75,19 @@ def destination_detail(request, name):
         "Review_form": Review_form,
         },
     )
+
+def review_delete(request, name, review_id):
+    """
+    View to delete a review
+    """
+    queryset = Destination.objects.filter(status=1)
+    destination = get_object_or_404(queryset, name=name)
+    review = get_object_or_404(Review, pk=review_id)
+
+    if review.user == request.user:
+        review.delete()
+        messages.add_message(request, messages.SUCCESS, 'Review deleted!')
+    else:
+        messages.add_message(request, messages.ERROR, 'You can only delete your own reviews!')
+
+    return redirect("view_destination", name=destination.name)
