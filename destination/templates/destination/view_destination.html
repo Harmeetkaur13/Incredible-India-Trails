@@ -145,7 +145,7 @@
                 </form>
                 {% else %}
                 <p>Log in to leave a review</p>
-                {% endif %}
+                {% endif %}                
             </div>
         </div>
     </div>
@@ -168,13 +168,33 @@
         </div>
     </div> 
 </div>
-<!-- Pop-up Message Box -->
-<div id="popup-message" class="popup-message" style="display: none;">
-    <div class="popup-content">
-        <p id="popup-text"></p>
-        <button id="popup-close" class="btn btn-primary">OK</button>
-    </div>
-</div>
+<!-- popu messages -->
+{% if messages %}
+                <div id="popup-message" class="popup">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                    <button onclick="closePopup()">OK</button>
+                </div>
+                <div id="overlay" class="overlay"></div>
+                {% endif %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var popup = document.getElementById("popup-message");
+        var overlay = document.getElementById("overlay");
+
+        if (popup) {
+            popup.style.display = "block";
+            overlay.style.display = "block";
+        }
+    });
+
+    function closePopup() {
+        document.getElementById("popup-message").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+    }
+</script>
+
 {% endblock content %}
 
 {% block extras %}

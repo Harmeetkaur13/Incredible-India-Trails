@@ -13,21 +13,3 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
-function showMessage(message) {
-    document.getElementById('popup-text').innerText = message;
-    document.getElementById('popup-message').style.display = 'block';
-}
-
-document.getElementById('popup-close').addEventListener('click', function() {
-    document.getElementById('popup-message').style.display = 'none';
-});
-
-function validateForm() {
-    console.log("validateForm called"); // Debug statement
-    const rating = document.querySelector('input[name="rating"]:checked');
-    if (!rating) {
-        alert("Please select a rating before submitting your review.");
-        return false;
-    }
-    return true;
-}
