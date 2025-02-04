@@ -131,7 +131,8 @@
                 <p>Posting as: {{ user.username }}</p>
                 <form id="reviewForm" method="post" style="margin-top: 1.3em;">
                     {% csrf_token %}
-                    <!-- Star rating system -->
+                    <input type="hidden" name="review_id" id="review_id" value="">
+            <!-- Star rating system -->
                     <div class="star-rating"> 
                         <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 stars">☆</label>
                         <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 stars">☆</label>

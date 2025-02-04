@@ -32,5 +32,50 @@ document.addEventListener("DOMContentLoaded", function() {
           deleteModal.show();
         });
       }
+    const editButtons = document.getElementsByClassName("btn-edit");
+    const commentText = document.getElementById("id_comment");
+    const commentForm = document.getElementById("reviewForm");
+    const submitButton = document.getElementById("submitButton");
+    const reviewIdInput = document.getElementById("review_id");
+
+    /**
+    * Initializes edit functionality for the provided edit buttons.
+    * 
+    * For each button in the `editButtons` collection:
+    * - Retrieves the associated review's ID upon click.
+    * - Fetches the content of the corresponding review.
+    * - Populates the `commentText` input/textarea with the review's content for editing.
+    * - Updates the submit button's text to "Update".
+    * - Sets the form's action attribute to the `edit_review/{reviewId}` endpoint.
+    */
+    for (let button of editButtons) {
+        button.addEventListener("click", (e) => {
+            let reviewId = e.target.getAttribute("data-review_id");
+            let destinationName = e.target.getAttribute("data-destination_name");
+            let reviewElement = document.getElementById(`review${reviewId}`);
+
+            if (!reviewElement) return;
+
+            let reviewContent = reviewElement.innerText.trim();
+            commentText.value = reviewContent;
+            submitButton.innerText = "Update";
+            reviewIdInput.value = reviewId;
+
+            // Set the form action to include the destination name and review ID
+            commentForm.setAttribute("action", `/destination/${destinationName}/edit_review/${reviewId}/`);
+
+            // Extract the review rating by counting filled stars
+            let stars = reviewElement.querySelectorAll(".rating i.fas");
+            let reviewRating = stars.length; // Number of filled stars
+
+            // Set the rating
+            document.querySelectorAll(".star-rating input").forEach(input => {
+                input.checked = input.value == reviewRating;
+            });
+            document.querySelectorAll(".star-rating label").forEach((label, index) => {
+                label.style.color = index > reviewRating ? "gold" : "#ddd";
+            });
+        });
+    }
+});    
     
-});
