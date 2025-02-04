@@ -76,6 +76,35 @@ def destination_detail(request, name):
         },
     )
 
+def review_edit(request, name, review_id):
+    """
+    View to edit a review
+    """
+    queryset = Destination.objects.filter(status=1)
+    destination = get_object_or_404(queryset, name=name)
+    review = get_object_or_404(Review, pk=review_id)
+
+    if request.method == "POST":
+        review_form = ReviewForm(data=request.POST, instance=review)
+        if review_form.is_valid() and review.user == request.user:
+            review = review_form.save(commit=False)
+            review.destination = destination
+            review.rating = request.POST.get('rating')
+            if review.rating is None:
+                messages.add_message(
+                    request, messages.ERROR,
+                    'Please select a rating before submitting your review.'
+                )
+                return redirect("view_destination", name=destination.name)
+            review.is_approved = False  # Mark as not approved after editing
+            review.save()
+            messages.add_message(request, messages.SUCCESS, 'Review updated!')
+        else:
+            messages.add_message(request, messages.ERROR, 'Error updating review!')
+
+    
+    return redirect("view_destination", name=destination.name)
+
 def review_delete(request, name, review_id):
     """
     View to delete a review

@@ -115,8 +115,8 @@
                     <p class="approval">This review is awaiting approval</p>
                     {% endif %}
                     {% if user.is_authenticated and review.user == user %}
-                    <button class="btn btn-delete" data-review_id="{{ review.id }}">Delete</button>
-                    <button class="btn btn-edit" data-review_id="{{ review.id }}">Edit</button>
+                    <button class="btn btn-delete" data-review_id="{{ review.id }}" data-destination_name="{{ destination.name }}">Delete</button>
+                    <button class="btn btn-edit" data-review_id="{{ review.id }}" data-destination_name="{{ destination.name }}">Edit</button>
                     {% endif %}
                 </div>
                 <!-- Our for loop ends here -->

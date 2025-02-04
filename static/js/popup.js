@@ -1,17 +1,30 @@
 document.addEventListener("DOMContentLoaded", function() {
     let stars = document.querySelectorAll(".rating label");
-
+    function updateStarRating(value) {
+        stars.forEach(label => {
+            label.style.color = "#ddd"; // Reset all stars
+        });
+        for (let i = 0; i < value; i++) {
+            labels[i].style.color = "gold"; // Gold selected stars
+        }
+    }
     stars.forEach(star => {
-        star.addEventListener("click", function() {
-            let value = this.previousElementSibling.value;
-            document.querySelectorAll(".rating label").forEach(label => {
-                label.style.color = "#ddd"; // Reset all stars
-            });
-            for (let i = 0; i < value; i++) {
-                stars[i].style.color = "gold"; // Highlight selected stars
-            }
+        star.addEventListener("change", function() {
+            let value = this.value;
+            updateStarRating(value);
         });
     });
+    // stars.forEach(star => {
+    //     star.addEventListener("click", function() {
+    //         let value = this.previousElementSibling.value;
+    //         document.querySelectorAll(".rating label").forEach(label => {
+    //             label.style.color = "#ddd"; // Reset all stars
+    //         });
+    //         for (let i = 0; i < value; i++) {
+    //             stars[i].style.color = "gold"; // Highlight selected stars
+    //         }
+    //     });
+    // });
     const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
     const deleteButtons = document.getElementsByClassName("btn-delete");
     const deleteConfirm = document.getElementById("deleteConfirm");
@@ -62,19 +75,17 @@ document.addEventListener("DOMContentLoaded", function() {
             reviewIdInput.value = reviewId;
 
             // Set the form action to include the destination name and review ID
-            commentForm.setAttribute("action", `/destination/${destinationName}/edit_review/${reviewId}/`);
+            commentForm.setAttribute("action", `/${destinationName}/edit_review/${reviewId}/`);
 
             // Extract the review rating by counting filled stars
-            let stars = reviewElement.querySelectorAll(".rating i.fas");
-            let reviewRating = stars.length; // Number of filled stars
+            let starCount = reviewElement.querySelectorAll(".rating i.fas").length;
+            // let reviewRating = stars.length; // Number of filled stars
 
             // Set the rating
             document.querySelectorAll(".star-rating input").forEach(input => {
-                input.checked = input.value == reviewRating;
+                input.checked = input.value == starCount;
             });
-            document.querySelectorAll(".star-rating label").forEach((label, index) => {
-                label.style.color = index > reviewRating ? "gold" : "#ddd";
-            });
+            updateStarRating(starCount);
         });
     }
 });    
