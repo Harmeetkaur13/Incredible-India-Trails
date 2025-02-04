@@ -67,7 +67,7 @@ class ReviewAdmin(admin.ModelAdmin):
     Methods:
     rating_display(obj): Returns a string representation of the rating using stars.
     """
-    # list_display = ("destination", "rating", "comment", "is_approved", "created_at")
+    list_display = ("comment", "user", "destination", "rating_display", "is_approved", "created_at")
     list_filter = ("is_approved", "rating", "destination")
     search_fields = ("destination__name", "user__username", "comment")
     ordering = ("-created_at",)
@@ -77,4 +77,3 @@ class ReviewAdmin(admin.ModelAdmin):
         rating = obj.rating if obj.rating is not None else 0
         return "★" * rating + "☆" * (5 - rating)
     rating_display.short_description = 'Rating'
-    list_display = ("destination", "rating_display", "comment", "is_approved", "created_at")
