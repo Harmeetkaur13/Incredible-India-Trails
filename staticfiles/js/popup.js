@@ -14,17 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
             updateStarRating(value);
         });
     });
-    // stars.forEach(star => {
-    //     star.addEventListener("click", function() {
-    //         let value = this.previousElementSibling.value;
-    //         document.querySelectorAll(".rating label").forEach(label => {
-    //             label.style.color = "#ddd"; // Reset all stars
-    //         });
-    //         for (let i = 0; i < value; i++) {
-    //             stars[i].style.color = "gold"; // Highlight selected stars
-    //         }
-    //     });
-    // });
     const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
     const deleteButtons = document.getElementsByClassName("btn-delete");
     const deleteConfirm = document.getElementById("deleteConfirm");
@@ -79,7 +68,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Extract the review rating by counting filled stars
             let starCount = reviewElement.querySelectorAll(".rating i.fas").length;
-            // let reviewRating = stars.length; // Number of filled stars
 
             // Set the rating
             document.querySelectorAll(".star-rating input").forEach(input => {

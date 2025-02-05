@@ -296,7 +296,7 @@ footer {
 
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .masthead {
         flex-direction: column;
         align-items: center;
