@@ -1,5 +1,5 @@
 {% extends "basefile.html" %}
-
+{% load static %}
 {% block content %}
 
 <div class="container-fluid">
@@ -93,4 +93,18 @@
     </ul>
 </nav>
 {% endif %}
+<!-- popup messages -->
+{% if messages %}
+                <div id="popup-message" class="popup">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                    <button id="popup-close">OK</button>
+                </div>
+                <div id="overlay" class="overlay"></div>
+{% endif %}
 {% endblock content %}
+
+{% block extras %}
+<script src="{% static 'js/popup.js' %}"></script>
+{% endblock extras %}

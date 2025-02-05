@@ -11,7 +11,7 @@ class AllDestinations(generic.ListView):
     paginate_by = 6
 
     def get_queryset(self):
-        queryset = Destination.objects.all()
+        queryset = Destination.objects.filter(is_approved=True)
         search_query = self.request.GET.get('search', '')
         category_id = self.request.GET.get('category', '')
 
@@ -24,8 +24,6 @@ class AllDestinations(generic.ListView):
             )
         if category_id:
             queryset = queryset.filter(category_id=category_id)
-        if not self.request.user.is_superuser:
-            queryset = queryset.filter(is_approved=True)
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -125,7 +123,7 @@ def review_delete(request, name, review_id):
 
 def add_destination(request):
     if request.method == 'POST':
-        form = DestinationForm(request.POST)
+        form = DestinationForm(request.POST, request.FILES)
         formset = ImageFormSet(request.POST, request.FILES)
         if form.is_valid() and formset.is_valid():
             destination = form.save(commit=False)
@@ -136,9 +134,11 @@ def add_destination(request):
                     image = form.save(commit=False)
                     image.destination = destination
                     image.save()
-            messages.success(request, 'Your destination has been submitted and is awaiting approval.')
-            return redirect('home')
+            messages.success(request, 'Your destination has been submitted and is awaiting approval.')  
+            return redirect('add_destination')  # Redirect ensures message persists in session
+
     else:
         form = DestinationForm()
         formset = ImageFormSet()
+
     return render(request, 'destination/add_destination.html', {'form': form, 'formset': formset})

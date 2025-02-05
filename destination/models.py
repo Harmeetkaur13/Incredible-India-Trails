@@ -53,6 +53,7 @@ class Destination(models.Model):
         # Automatically approve destinations added by a superuser
         if self.added_by.is_superuser:
             self.is_approved = True
+            self.status = 1
         super().save(*args, **kwargs)
 
     def __str__(self):

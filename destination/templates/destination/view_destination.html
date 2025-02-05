@@ -169,17 +169,17 @@
         </div>
     </div> 
 </div>
-<!-- popu messages -->
+<!-- popup messages -->
 {% if messages %}
                 <div id="popup-message" class="popup">
                     {% for message in messages %}
                         <p>{{ message }}</p>
                     {% endfor %}
-                    <button onclick="closePopup()">OK</button>
+                    <button id="popup-close">OK</button>
                 </div>
                 <div id="overlay" class="overlay"></div>
-                {% endif %}
-<script>
+{% endif %}
+<!-- <script>
     document.addEventListener("DOMContentLoaded", function () {
         var popup = document.getElementById("popup-message");
         var overlay = document.getElementById("overlay");
@@ -194,7 +194,7 @@
         document.getElementById("popup-message").style.display = "none";
         document.getElementById("overlay").style.display = "none";
     }
-</script>
+</script> -->
 
 {% endblock content %}
 
