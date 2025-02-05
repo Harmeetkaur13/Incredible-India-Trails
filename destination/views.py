@@ -89,12 +89,6 @@ def review_edit(request, name, review_id):
             review = review_form.save(commit=False)
             review.destination = destination
             review.rating = request.POST.get('rating')
-            if review.rating is None:
-                messages.add_message(
-                    request, messages.ERROR,
-                    'Please select a rating before submitting your review.'
-                )
-                return redirect("view_destination", name=destination.name)
             review.is_approved = False  # Mark as not approved after editing
             review.save()
             messages.add_message(request, messages.SUCCESS, 'Review updated!')
