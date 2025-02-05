@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from django.db.models import Q
 from .models import Category,Destination, Review
-from .forms import ReviewForm
+from .forms import ReviewForm, DestinationForm, ImageFormSet
 from django.contrib import messages
 
 # Create your views here.
@@ -24,7 +24,8 @@ class AllDestinations(generic.ListView):
             )
         if category_id:
             queryset = queryset.filter(category_id=category_id)
-
+        if not self.request.user.is_superuser:
+            queryset = queryset.filter(is_approved=True)
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -120,3 +121,24 @@ def review_delete(request, name, review_id):
         messages.add_message(request, messages.ERROR, 'You can only delete your own reviews!')
 
     return redirect("view_destination", name=destination.name)
+
+
+def add_destination(request):
+    if request.method == 'POST':
+        form = DestinationForm(request.POST)
+        formset = ImageFormSet(request.POST, request.FILES)
+        if form.is_valid() and formset.is_valid():
+            destination = form.save(commit=False)
+            destination.added_by = request.user
+            destination.save()
+            for form in formset:
+                if form.cleaned_data.get('image'):
+                    image = form.save(commit=False)
+                    image.destination = destination
+                    image.save()
+            messages.success(request, 'Your destination has been submitted and is awaiting approval.')
+            return redirect('home')
+    else:
+        form = DestinationForm()
+        formset = ImageFormSet()
+    return render(request, 'destination/add_destination.html', {'form': form, 'formset': formset})

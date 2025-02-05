@@ -1,0 +1,48 @@
+{% extends 'basefile.html' %} 
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-3 offset-md-2">
+            {% if user.is_authenticated %}
+            <h3>Add a New Destination</h3>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <h4>Upload Images</h4>
+                {{ formset.management_form }}
+                {% for form in formset %}
+                    {{ form|crispy }}
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            {% else %}
+            <p>"Found a place that took your breath away? Share your experience with fellow travelers 
+                    by adding it to our collection! Whether it’s a serene beach, a historical landmark,
+                     or a cozy café tucked away in the mountains, let others explore the beauty you’ve discovered.
+                      Contribute a new destination to Incredible India Trails and help 
+                      build a travel guide enriched by real experiences!"</p>
+            
+            <p>You need to <a href="{% url 'account_login' %}?next={{ request.path }}">sign in</a> to add a destination.</p>
+            <p>If you do not have an account yet, don't worry! <a href="{% url 'account_signup' %}?next={{ request.path }}">Click here to create one</a>. After signing up, you can <a href="{% url 'account_login' %}?next={{ request.path }}">sign in</a> and return to this page.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!-- popup messages -->
+{% if messages %}
+                <div id="popup-message" class="popup">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                    <button id="popup-close">OK</button>
+                </div>
+                <div id="overlay" class="overlay"></div>
+{% endif %}
+{% endblock content %}
+
+{% block extras %}
+<script src="{% static 'js/popup.js' %}"></script>
+{% endblock extras %}
