@@ -6,11 +6,11 @@
 <div class="masthead">
     <div class="container">
         <div class="row g-0">
-            <div class="col-md-3 col-lg-3 masthead-text">
+            <div class="col-lg-3 masthead-text mb-3 mb-lg-0">
                 <h1 class="destination-title">{{ destination.name }}</h1>
                 <p class="destination-subtitle">{{ destination.added_by }} | {{ destination.created_at }}</p>
             </div>
-            <div class="col-md-9 col-lg-9 masthead-image collage-container">
+            <div class="col-lg-9 masthead-image collage-container">
                 {% for image in destination.images_destination.all %}
                     <div class="collage-item {% if forloop.first %}d-block{% else %}d-none d-md-block{% endif %}">
                         <img src="{{ image.image.url }}" alt="Image for {{ destination.name }}" class="collage-image" onclick="showCarousel('{{ forloop.counter0 }}')">
