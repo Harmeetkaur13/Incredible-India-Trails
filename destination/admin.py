@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
-from .models import Category, Destination,Review,Image,Contact
+
+from .models import Category, Contact, Destination, Image, Review
+
 
 class ImageInline(admin.TabularInline):
     """

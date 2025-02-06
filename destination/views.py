@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views import generic
-from django.db.models import Q
-from .models import Category,Destination, Review
-from .forms import ReviewForm, DestinationForm, ImageFormSet, ContactForm
 from django.contrib import messages
+from django.db.models import Q
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views import generic
+
+from .forms import ContactForm, DestinationForm, ImageFormSet, ReviewForm
+from .models import Category, Destination, Review
+
 
 # Create your views here.
 class AllDestinations(generic.ListView):

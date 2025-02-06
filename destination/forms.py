@@ -1,7 +1,7 @@
-from .models import Review
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Destination,Image,Contact
+
+from .models import Contact, Destination, Image, Review
 
 
 class ReviewForm(forms.ModelForm):
