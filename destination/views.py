@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from django.db.models import Q
 from .models import Category,Destination, Review
-from .forms import ReviewForm, DestinationForm, ImageFormSet
+from .forms import ReviewForm, DestinationForm, ImageFormSet, ContactForm
 from django.contrib import messages
 
 # Create your views here.
@@ -128,7 +128,7 @@ def add_destination(request):
                     image = form.save(commit=False)
                     image.destination = destination
                     image.save()
-            messages.success(request, 'Your destination has been submitted and is awaiting approval.')  
+            messages.add_message(request, messages.SUCCESS, 'Your destination has been submitted and is awaiting approval.')  
             return redirect('add_destination')  # Redirect ensures message persists in session
 
     else:
@@ -136,3 +136,17 @@ def add_destination(request):
         formset = ImageFormSet()
 
     return render(request, 'destination/add_destination.html', {'form': form, 'formset': formset})
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            contact = form.save(commit=False)
+            if request.user.is_authenticated:
+                contact.user = request.user
+            contact.save()
+            messages.add_message(request, messages.SUCCESS, 'Your message has been sent successfully. We will get back to you soon if required after reviewing your message.')
+            return redirect('contact')
+    else:
+        form = ContactForm()
+    return render(request, 'destination/contact.html', {'form': form})

@@ -59,7 +59,7 @@ class Destination(models.Model):
     def __str__(self):
         return f"{self.name} | written by {self.added_by}"
     class Meta:
-        ordering = ["-created_at"]
+        ordering = ["-updated_at"]
 
 # Review model to store reviews for destinations
 RATING_CHOICES = [(i, f"{i} Star") for i in range(0, 6)]  # Rating choices from 1 to 5 stars
@@ -82,3 +82,15 @@ class Review(models.Model):
 
     class Meta:
         ordering = ['-created_at']  # Show most recent reviews first
+
+# Contact model to store feedback from the user 
+class Contact(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Contact from {self.name} ({self.email})"

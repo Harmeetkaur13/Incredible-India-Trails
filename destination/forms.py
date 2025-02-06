@@ -1,7 +1,7 @@
 from .models import Review
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Destination,Image
+from .models import Destination,Image,Contact
 
 
 class ReviewForm(forms.ModelForm):
@@ -29,3 +29,13 @@ class ImageForm(forms.ModelForm):
 
 ImageFormSet = forms.inlineformset_factory(Destination, Image, form=ImageForm, extra=3, can_delete=False)        
 
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['name', 'email', 'subject', 'message']
+        widgets = {
+            'name': forms.TextInput(attrs={'required': True}),
+            'email': forms.EmailInput(attrs={'required': True}),
+            'subject': forms.TextInput(attrs={'required': True}),
+            'message': forms.Textarea(attrs={'required': True}),
+        }

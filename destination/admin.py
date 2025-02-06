@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
-from .models import Category, Destination,Review,Image
+from .models import Category, Destination,Review,Image,Contact
 
 class ImageInline(admin.TabularInline):
     """
@@ -77,3 +77,10 @@ class ReviewAdmin(admin.ModelAdmin):
         rating = obj.rating if obj.rating is not None else 0
         return "★" * rating + "☆" * (5 - rating)
     rating_display.short_description = 'Rating'
+
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'subject', 'created_at')
+    search_fields = ('name', 'email', 'subject')
+    readonly_fields = ('created_at',)
