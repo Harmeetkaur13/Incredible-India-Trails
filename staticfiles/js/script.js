@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+/* global bootstrap */
 document.addEventListener("DOMContentLoaded", function() {
     let stars = document.querySelectorAll(".rating label");
     function updateStarRating(value) {
@@ -55,8 +57,8 @@ document.addEventListener("DOMContentLoaded", function() {
     * - Updates the submit button's text to "Update".
     * - Sets the form's action attribute to the `edit_review/{reviewId}` endpoint.
     */
-    for (let button of editButtons) {
-        button.addEventListener("click", (e) => {
+        
+    function handleEditClick(e) {
             let reviewId = e.target.getAttribute("data-review_id");
             let destinationName = e.target.getAttribute("data-destination_name");
             let reviewElement = document.getElementById(`review${reviewId}`);
@@ -73,12 +75,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Extract the review rating by counting filled stars
             let starCount = reviewElement.querySelectorAll(".rating i.fas").length;
-
+            
+            
             // Set the rating
             document.querySelectorAll(".star-rating input").forEach(input => {
                 input.checked = input.value == starCount;
             });
             updateStarRating(starCount);
+        }
+    for (var j = 0; j < editButtons.length; j++) {
+            editButtons[j].addEventListener("click", handleEditClick);
+        }  
+         
+    // Handle carousel modal
+    var carouselModalElement = document.getElementById("carouselModal");
+    if (carouselModalElement) {
+        carouselModalElement.addEventListener('show.bs.modal', function() {
+            carouselModalElement.removeAttribute('aria-hidden');
         });
-    }
+        carouselModalElement.addEventListener('hide.bs.modal', function() {
+            carouselModalElement.setAttribute('aria-hidden', 'true');
+        });
+    }       
 });
+     
