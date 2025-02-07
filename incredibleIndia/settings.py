@@ -109,6 +109,10 @@ WSGI_APPLICATION = "incredibleIndia.wsgi.application"
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
+CLOUDINARY_STORAGE = {
+    'CLOUDINARY_URL': os.environ.get("CLOUDINARY_URL"),
+    'SECURE' : True
+}
 CSRF_TRUSTED_ORIGINS = [
     "https://localhost",
     "https://*.herokuapp.com"
