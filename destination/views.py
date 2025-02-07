@@ -33,6 +33,7 @@ class AllDestinations(generic.ListView):
         context['categories'] = Category.objects.all()
         return context
 
+
 def destination_detail(request, name):
     """
     Display an individual :model:`destination.Destination`.
@@ -50,7 +51,8 @@ def destination_detail(request, name):
     queryset = Destination.objects.filter(status=1)
     destination = get_object_or_404(queryset, name=name)
     reviews = destination.reviews_destination.all().order_by("-created_at")
-    review_count = destination.reviews_destination.filter(is_approved=True).count()
+    rc = destination.reviews_destination.filter(is_approved=True).count()
+    review_count = rc
     Review_form = ReviewForm()
     if request.method == "POST":
         Review_form = ReviewForm(data=request.POST)
@@ -65,17 +67,18 @@ def destination_detail(request, name):
                 'Your review is submitted and awaiting for the approval.'
             )
             return redirect("view_destination", name=destination.name)
-   
 
     return render(
         request,
         "destination/view_destination.html",
-        {"destination": destination,
-        "reviews": reviews,
-        "review_count": review_count,
-        "Review_form": Review_form,
+        {
+            "destination": destination,
+            "reviews": reviews,
+            "review_count": review_count,
+            "Review_form": Review_form,
         },
     )
+
 
 def review_edit(request, name, review_id):
     """
@@ -95,10 +98,11 @@ def review_edit(request, name, review_id):
             review.save()
             messages.add_message(request, messages.SUCCESS, 'Review updated!')
         else:
-            messages.add_message(request, messages.ERROR, 'Error updating review!')
+            messages.add_message(request, messages.ERROR,
+                                 'Error updating review!')
 
-    
     return redirect("view_destination", name=destination.name)
+
 
 def review_delete(request, name, review_id):
     """
@@ -112,7 +116,8 @@ def review_delete(request, name, review_id):
         review.delete()
         messages.add_message(request, messages.SUCCESS, 'Review deleted!')
     else:
-        messages.add_message(request, messages.ERROR, 'You can only delete your own reviews!')
+        messages.add_message(request, messages.ERROR,
+                             'You can only delete your own reviews!')
 
     return redirect("view_destination", name=destination.name)
 
@@ -130,14 +135,18 @@ def add_destination(request):
                     image = form.save(commit=False)
                     image.destination = destination
                     image.save()
-            messages.add_message(request, messages.SUCCESS, 'Your destination has been submitted and is awaiting approval.')  
-            return redirect('add_destination')  # Redirect ensures message persists in session
-
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Your destination has been submitted and is awaiting approval.'
+            )
+            return redirect('add_destination')
     else:
         form = DestinationForm()
         formset = ImageFormSet()
 
-    return render(request, 'destination/add_destination.html', {'form': form, 'formset': formset})
+    return render(request, 'destination/add_destination.html',
+                           {'form': form, 'formset': formset})
+
 
 def contact(request):
     if request.method == 'POST':
@@ -147,7 +156,11 @@ def contact(request):
             if request.user.is_authenticated:
                 contact.user = request.user
             contact.save()
-            messages.add_message(request, messages.SUCCESS, 'Your message has been sent successfully. We will get back to you soon if required after reviewing your message.')
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Your message has been sent successfully. We will get back to '
+                'you soon if required after reviewing your message.'
+            )
             return redirect('contact')
     else:
         form = ContactForm()

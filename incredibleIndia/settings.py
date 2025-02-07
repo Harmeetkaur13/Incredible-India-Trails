@@ -28,11 +28,10 @@ if os.path.isfile('env.py'):
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-CLOUDINARY_SECURE = True
+DEBUG = False
 
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost','.herokuapp.com' ]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.herokuapp.com']
 
 
 # Application definition
@@ -61,7 +60,7 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = "bootstrap5" 
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -109,10 +108,6 @@ WSGI_APPLICATION = "incredibleIndia.wsgi.application"
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
-CLOUDINARY_STORAGE = {
-    'CLOUDINARY_URL': os.environ.get("CLOUDINARY_URL"),
-    'SECURE' : True
-}
 CSRF_TRUSTED_ORIGINS = [
     "https://localhost",
     "https://*.herokuapp.com"
@@ -122,16 +117,28 @@ CSRF_TRUSTED_ORIGINS = [
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "UserAttributeSimilarityValidator"
+        ),
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "MinimumLengthValidator"
+        ),
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "CommonPasswordValidator"
+        ),
     },
     {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "NumericPasswordValidator"
+        ),
     },
 ]
 

@@ -8,6 +8,8 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ('comment',)
+
+
 class DestinationForm(forms.ModelForm):
     class Meta:
         model = Destination
@@ -19,6 +21,7 @@ class DestinationForm(forms.ModelForm):
             'location': forms.TextInput(attrs={'required': True}),
         }
 
+
 class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
@@ -27,7 +30,10 @@ class ImageForm(forms.ModelForm):
             'image': forms.ClearableFileInput(attrs={'required': True}),
         }
 
-ImageFormSet = forms.inlineformset_factory(Destination, Image, form=ImageForm, extra=3, can_delete=False)        
+
+ImageFormSet = forms.inlineformset_factory(Destination, Image, form=ImageForm,
+                                           extra=3, can_delete=False)
+
 
 class ContactForm(forms.ModelForm):
     class Meta:
