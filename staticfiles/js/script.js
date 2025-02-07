@@ -40,6 +40,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 deleteModal.show();
             });
         }
+        deleteModalElement.addEventListener('show.bs.modal', function() {
+            deleteModalElement.removeAttribute('inert');
+        });
+        deleteModalElement.addEventListener('hide.bs.modal', function() {
+            deleteModalElement.setAttribute('inert', '');
+        });
     }
     const editButtons = document.getElementsByClassName("btn-edit");
     const commentText = document.getElementById("id_comment");
@@ -91,10 +97,10 @@ document.addEventListener("DOMContentLoaded", function() {
     var carouselModalElement = document.getElementById("carouselModal");
     if (carouselModalElement) {
         carouselModalElement.addEventListener('show.bs.modal', function() {
-            carouselModalElement.removeAttribute('aria-hidden');
+            carouselModalElement.removeAttribute('inert');
         });
         carouselModalElement.addEventListener('hide.bs.modal', function() {
-            carouselModalElement.setAttribute('aria-hidden', 'true');
+            carouselModalElement.setAttribute('inert', '');
         });
     }       
 });
