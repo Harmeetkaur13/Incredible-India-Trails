@@ -93,8 +93,8 @@ class Review(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Review for {self.destination.name}: '{self.comment}'
-        by {self.user.username}"
+        return (f"Review for {self.destination.name}: '{self.comment}' "
+                f"by {self.user.username}")
 
     class Meta:
         ordering = ['-created_at']  # Show most recent reviews first
