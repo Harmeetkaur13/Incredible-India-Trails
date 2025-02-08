@@ -135,11 +135,17 @@ def add_destination(request):
                     image = form.save(commit=False)
                     image.destination = destination
                     image.save()
-            messages.add_message(
-                request, messages.SUCCESS,
-                'Your destination has been submitted and is awaiting approval.'
-            )
-            return redirect('add_destination')
+            if request.user.is_superuser:
+                messages.add_message(
+                    request, messages.SUCCESS,
+                    'Dear Admin, The destination was added successfully.'
+                )
+            else:
+                messages.add_message(
+                    request, messages.SUCCESS,
+                    'Your destination has been submitted and is awaiting approval.'
+                )
+            return redirect('home')
     else:
         form = DestinationForm()
         formset = ImageFormSet()

@@ -28,13 +28,15 @@
                 {% if destination_list %}
                     {% for destination in destination_list %}
                     <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="card mb-4">
+                        <div class="card mb-4">                            
                             <div class="card-body">
-                                <div id="carousel-{{ destination.id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+                                <div id="carousel-{{ destination.id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
                                     <div class="carousel-inner">
                                         {% for image in destination.images_destination.all %}
                                         <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                            <img class="d-block w-100 destinationimage" src="{{ image.image.url }}" alt="{{ destination.name }}">
+                                            <a href="{% url 'view_destination' destination.name %}">
+                                                <img class="d-block w-100 destinationimage" src="{{ image.image.url }}" alt="{{ destination.name }}">
+                                            </a>
                                         </div>
                                         {% endfor %}
                                     </div>
@@ -48,13 +50,14 @@
                                     </button>
                                 </div>
                                 <a href="{% url 'view_destination' destination.name %}" class="post-link">
-                                    <h2 class="card-title">{{ destination.name }}</h2>
-                                </a>
-                                <hr>
-                                <p>{{ destination.location }}</p>
-                                <p>Added by: {{ destination.added_by.username }}</p>
-                                <hr>
-                            </div>
+                                    <h2 class="card-title d-none d-lg-block">{{ destination.name }}</h2>
+                                    <h4 class="card-title d-block d-md-block d-lg-none">{{ destination.name }}</h4>
+                                    <hr>
+                                    <p>{{ destination.location }}<br>
+                                    Added by: {{ destination.added_by.username }}</p>
+                                    <hr>
+                                </a>    
+                            </div>                            
                         </div>
                     </div>
                     {% endfor %}
