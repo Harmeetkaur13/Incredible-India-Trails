@@ -63,18 +63,24 @@
 </script>
 
 <div class="container">
-    <div class="row">
-        <div class="col card mb-4  mt-1 left  top">
-            <div class="card-body">
-                <!-- The deestination detil goes inside the card-text. -->
-                <!-- Use the | safe filter inside the template tags -->
-                <article class="card-text">
-                    <h4>Experience the Essence of {{ destination.name }}</h4>
-                    {{ destination.description | safe }}
-                </article>
+    <div class="container">
+        <div class="row">
+            <div class="col card mb-4 mt-1 left top">
+                <div class="card-body">
+                    <!-- The destination detail goes inside the card-text. -->
+                    <!-- Use the | safe filter inside the template tags -->
+                    <article class="card-text">
+                        <h4>Experience the Essence of {{ destination.name }}</h4>
+                        <button class="btn btn-link p-0" type="button" data-bs-toggle="collapse" data-bs-target="#descriptionCollapse" aria-expanded="false" aria-controls="descriptionCollapse">
+                            Show Description
+                        </button>
+                        <div class="collapse" id="descriptionCollapse">
+                            {{ destination.description | safe }}
+                        </div>
+                    </article>
+                </div>
             </div>
         </div>
-    </div>
     <!-- Displaying count of reviews -->
     <div class="row">
         <div class="col-12">
