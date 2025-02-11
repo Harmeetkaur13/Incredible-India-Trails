@@ -15,7 +15,7 @@ Incredible India Trails is a web application designed to showcase the beauty and
   - Home Page- 
   - ![ screenshot of the wireframe home](static/images/wireframeHomepage.webp)
   - View Destinaion Page
-  - ![ screenshot of wireframe of View Destination page](static/images/wireframeViewdestination.webp)
+  - ![ screenshot of wireframe of View Destination page](static/images/wireframe2.webp)
 - **Design Rationale:**
   - The layout emphasises simplicity and readability, with Bootstrap 5 providing a responsive design. The colour scheme adheres to WCAG guidelines for contrast, and the typography uses accessible fonts for clarity.
   - Accessibility considerations include keyboard navigation and screen reader support, ensuring usability for users with diverse needs.
