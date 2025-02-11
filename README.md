@@ -13,9 +13,9 @@ Incredible India Trails is a web application designed to showcase the beauty and
   - [\[Link to the GitHub Projects kanban board.\]](https://github.com/users/Harmeetkaur13/projects/15)
 - **Wireframes:**
   - Home Page- 
-  - ![ screenshot of the wireframe](static/images/wireframeHomepage.webp)
+  - ![ screenshot of the wireframe home](static/images/wireframeHomepage.webp)
   - View Destinaion Page
-  - ![ Click to see the wireframe of View Destination page on different screens](static/images/wireframeViewdestination.webp)
+  - ![ screenshot of wireframe of View Destination page](static/images/wireframeViewdestination.webp)
 - **Design Rationale:**
   - The layout emphasises simplicity and readability, with Bootstrap 5 providing a responsive design. The colour scheme adheres to WCAG guidelines for contrast, and the typography uses accessible fonts for clarity.
   - Accessibility considerations include keyboard navigation and screen reader support, ensuring usability for users with diverse needs.
@@ -26,7 +26,7 @@ Incredible India Trails is a web application designed to showcase the beauty and
   - For the content of the website, "Roboto" was chosen as a cleaner font which is easier to read, while still being slightly softer on the eye. 
   **Color Palette:**
   - These are some colors I have used for this project, color picked by https://imagecolorpicker.com/?utm_content=cmp-true
-  ![ color palette](static/images/colorpalette.webp)
+  - ![ color palette](static/images/colorpalette.webp)
 - **Reasoning For Any Final Changes:**
   - Added the collapse option for the description on view destination page. The reason behind this ws on mobile screens this was affecting the performace on lighthouse  due to its large layout. This change really enhanced the performance.
   - Added pagination for the search and category filter. 
@@ -89,7 +89,7 @@ Incredible India Trails is a web application designed to showcase the beauty and
 
 ### Database planning
 - I used an Entity Relationship Diagram generated through http://dbdiagram.io/ to plan my database.
-- ![ERD diagram](static/images/Erd.webp)
+- ![ERD diagram](static/images/ERD.webp)
 
 ### Creating a database
 1. Navigate to [PostgreSQL](https://dbs.ci-dbs.net/) from Code Institute.
