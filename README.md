@@ -13,9 +13,9 @@ Incredible India Trails is a web application designed to showcase the beauty and
   - [\[Link to the GitHub Projects kanban board.\]](https://github.com/users/Harmeetkaur13/projects/15)
 - **Wireframes:**
   - Home Page- 
-  - [ screenshot of the wireframe](static/images/wireframeHomepage.webp)
+  - ![ screenshot of the wireframe](static/images/wireframeHomepage.webp)
   - View Destinaion Page
-  - [ Click to see the wireframe of View Destination page on different screens](static/images/wireframeViewdestination.webp)
+  - ![ Click to see the wireframe of View Destination page on different screens](static/images/wireframeViewdestination.webp)
 - **Design Rationale:**
   - The layout emphasises simplicity and readability, with Bootstrap 5 providing a responsive design. The colour scheme adheres to WCAG guidelines for contrast, and the typography uses accessible fonts for clarity.
   - Accessibility considerations include keyboard navigation and screen reader support, ensuring usability for users with diverse needs.
@@ -35,51 +35,51 @@ Incredible India Trails is a web application designed to showcase the beauty and
 1. Admin Interface:
 - Description: Admins have a customized interface to manage destinations, reviews, and user feedback.
 - Value: Simplifies the management of content and user interactions on the platform.
-- [ Click to see](static/images/featureAdmin.webp)
+- ![ Click to see](static/images/featureAdmin.webp)
 
 2. Search and Filter:
 - Description: Users can search for destinations and filter them by categories.
 - Value: Makes it easy for users to find specific destinations based on their preferences.
-- [ Click to see search feature](static/images/featureFilterbySearch.webp)
-- [ Click to see Category feature](static/images/featureFilterbyCategoty.webp)
+- ![ Click to see search feature](static/images/featureFilterbySearch.webp)
+- ![ Click to see Category feature](static/images/featureFilterbyCategoty.webp)
 
 3. User Authentication and notify:
 - Description: Users can sign up, log in, and log out securely.
 - Value: Ensures that only registered users can add reviews and destinations, enhancing security and user accountability.
-- [ Click to see SignUp feature](static/images/featureSignup.webp)
-- [ Click to see Conforming SignIn feature](static/images/featureSignIn.webp)
-- [ Click to see Conforming SignOut feature](static/images/featureSignout.webp)
+- ![ Click to see SignUp feature](static/images/featureSignup.webp)
+- ![ Click to see Conforming SignIn feature](static/images/featureSignIn.webp)
+- ![ Click to see Conforming SignOut feature](static/images/featureSignout.webp)
 
 4. Review System:
 - Description: Users can leave reviews for destinations, including ratings and comments.
 - Value: Allows users to share their experiences and helps others make informed decisions.
-- [ Click to see login Required feature](static/images/featureLoginRequiredToAddReview.webp)
-- [ Click to see Add Review feature](static/images/featureAddReview.webp)
-- [ Click to see Edit/Delete Review feature](static/images/featureEditdeleteReview.webp)
+- ![ Click to see login Required feature](static/images/featureLoginRequiredToAddReview.webp)
+- ![ Click to see Add Review feature](static/images/featureAddReview.webp)
+- ![ Click to see Edit/Delete Review feature](static/images/featureEditdeleteReview.webp)
 
 5. Image Carousel:
 - Description: Each destination page features an image carousel to showcase multiple images.
 - Value: Enhances the visual appeal and provides a better user experience by displaying multiple images.
-- [ Click to see Add Carousel feature](static/images/featureCarousel.webp)
+- ![ Click to see Add Carousel feature](static/images/featureCarousel.webp)
 
 6. Contact Form:
 - Description: Users can submit feedback or inquiries through a contact form.
 - Value: Provides a way for users to communicate with the site administrators.
-- [ Click to see Contact feature](static/images/featureContactForm.webp)
-- [ Click to see Confirmation feature](static/images/featureConfirmSubmission.webp)
+- ![ Click to see Contact feature](static/images/featureContactForm.webp)
+- ![ Click to see Confirmation feature](static/images/featureConfirmSubmission.webp)
 
 
 7. Add Destination:
 - Description: Users can add destination they know through 'Share your Find' link.
 - Value: Provides a way for logged-in users to share the places they know with everyone.
-- [ Click to see LoginRequired feature](static/images/featureLoginToAddDestination.webp)
-- [ Click to see Add Destination feature](static/images/FeatureaddDEstination.webp)
-- [ Click to see Confirmation feature](static/images/featureConfirmDesinationAdded.webp)
+- ![ Click to see LoginRequired feature](static/images/featureLoginToAddDestination.webp)
+- ![ Click to see Add Destination feature](static/images/FeatureaddDEstination.webp)
+- ![ Click to see Confirmation feature](static/images/featureConfirmDesinationAdded.webp)
 
 8. Pagination:
 - Description: PREV and NEXT buttons are shown at the bottom of the page if there are more than 6 destinations on the home page. The PREV button does not show on the first page, and the NEXT button does not show on the last page.
 - Value: Enhances navigation by allowing users to easily browse through multiple pages of destinations.
-- [ Click to see Pagination feature](static/images/featurePagination.webp)
+- ![ Click to see Pagination feature](static/images/featurePagination.webp)
 
 - Inclusivity Notes:
   - Features include ARIA labels, inert and alt attributes on images for screen readers.
