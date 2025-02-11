@@ -31,6 +31,8 @@ class AllDestinations(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
+        context['search_query'] = self.request.GET.get('search', '')
+        context['category_id'] = self.request.GET.get('category', '')
         return context
 
 
