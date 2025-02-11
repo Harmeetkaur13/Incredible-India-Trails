@@ -28,8 +28,8 @@ Incredible India Trails is a web application designed to showcase the beauty and
   - These are some colors I have used for this project, color picked by https://imagecolorpicker.com/?utm_content=cmp-true
   ![ color palette](static/images/colorpalette.webp)
 - **Reasoning For Any Final Changes:**
-  - Added the collapse option for the description on view destination page. The reason behind this ws on mobile screens this was affecting the performace on lighthouse  due to its large layout.
-  - This change really enhanced the performance.
+  - Added the collapse option for the description on view destination page. The reason behind this ws on mobile screens this was affecting the performace on lighthouse  due to its large layout. This change really enhanced the performance.
+  - Added pagination for the search and category filter. 
 
 ## Key Features
 1. Admin Interface:
